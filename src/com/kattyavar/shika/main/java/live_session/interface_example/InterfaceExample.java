@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 
 
+
 /**
  * Why we need interface
  * Types of interface.
@@ -37,26 +38,38 @@ class Base {
 
 public class InterfaceExample {
 
+
+    private static void dispaly(ID id){
+    }
+
+    private static void dispaly(IC id){
+    }
+
+
     public static void main(String[] args) throws CloneNotSupportedException, IOException {
 
         Demo obj = new Demo();
+        //obj.useThis();
+
+        IA ia = new PatilImp();
+        IB ib = new PatilImp();
+        IC ic = new PatilImp();
+        ID id = new PatilImp();
 
 
-        obj.useThis();
+        if (ia instanceof ID) {
+            ID id2 = (ID) ia;
+        }
+
+
     }
 
 
-}
-
-interface IDefalutExample {
-    default void display (){
-        System.out.println("in Display from interface...");
-    }
 }
 
 class Demo {
 
-     void display (){
+    void display() {
         System.out.println("in Display from interface...");
     }
 
@@ -69,11 +82,41 @@ class Demo {
 }
 
 abstract class CanIStoreMemberVAriable {
-    private String name;
-    public Integer age;
-    private final Integer maxAge = 39;
-    protected static String staticVarName;
     private static final String staticFinalVar = "Yes we can..";
+    protected static String staticVarName;
+    private final Integer maxAge = 39;
+    public Integer age;
+    private String name;
 
+
+}
+
+class PatilImp implements IA, IB, IC, ID {
+
+
+}
+
+
+interface IDefalutExample {
+    default void display() {
+        System.out.println("in Display from interface...");
+    }
+}
+
+interface IA {
+
+
+}
+
+
+interface IB {
+
+}
+
+interface IC {
+
+}
+
+interface ID {
 
 }
