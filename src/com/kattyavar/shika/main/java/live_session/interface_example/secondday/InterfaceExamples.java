@@ -20,19 +20,65 @@ public class InterfaceExamples {
 
          */
 
+        /*
         PrasadSir obj = new PrasadSir();
         obj.display();
 
 
         PrasadSir.APatil aPatil = new PrasadSir.MethodInnerClass();
 
-        List<String> list = new ArrayList<>();
 
+         */
 
-
-        Iterator<String> iterator  = list.iterator();
+        A a = new B();
+        a.show();
 
     }
+}
+
+
+class Data{
+
+}
+
+interface ILoadData {
+    List<Data> loadData();
+    default String getConfigFileName(){
+        return "application.conf";
+    } // application.conf
+}
+
+class ILoadDataImpl implements ILoadData {
+    @Override
+    public List<Data> loadData() {
+        return List.of();
+    }
+}
+
+class ILoadDataImp2 implements ILoadData {
+    @Override
+    public List<Data> loadData() {
+        return List.of();
+    }
+
+    @Override
+    public String getConfigFileName() {
+        return "Amol.conf";
+    }
+}
+
+class A {
+    void show(){
+        System.out.println("A::show");
+    }
+}
+
+class  B  extends  A{
+    @Override
+    void show() {
+        System.out.println("B::show");
+    }
+
 }
 
 
@@ -228,3 +274,33 @@ class DemoImpl implements IDemo {
 
 
  */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
