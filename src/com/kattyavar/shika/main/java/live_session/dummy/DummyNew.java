@@ -14,6 +14,9 @@ public class DummyNew {
     College college3 = new College("VIT", 3);
     College college4 = new College("Fergusson", 4);
 
+
+    College collegen; //  ....
+
     System.out.println("Let have a look at hashCode of college1  =" + college1.hashCode());
     System.out.println("Let have a look at hashCode of college12 =" + college2.hashCode());
 
