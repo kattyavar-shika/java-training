@@ -27,6 +27,7 @@ public class GernericLinkList<T> {
       head = newNode;
       return;
     }
+    // if you would like to insert at index 2
     Node<T> currentNode = head;
     for (int i = 0; i < index - 1; i++) {
       if (currentNode == null) {

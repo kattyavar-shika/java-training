@@ -1,13 +1,10 @@
 package com.kattyavar.shika.main.java.live_session.collections;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class ArrayListExample {
 
-  public static void main(String[] args) {
+  void samples(){
 
     String[] arraySample = new String[0];
 
@@ -66,6 +63,61 @@ public class ArrayListExample {
     for (Options item : array) {
       System.out.println(item);
     }
+  }
+
+  void toArrayExample(){
+    List<String> stringList = new ArrayList<>();
+
+    stringList.add("Step 1");
+    stringList.add("Step 2");
+    stringList.add("Step 3");
+
+    String[] array = stringList.toArray(new String[0]);
+    System.out.println(array);
+    for(String item : array){
+      System.out.println(item);
+    }
+
+    Iterator<String> iterator =  stringList.iterator();
+    while(iterator.hasNext()){
+      String item = iterator.next();
+      System.out.println(" ===" + item);
+    }
+
+    String[] newList = new String[10];
+    newList[0] = "back 0";
+    newList[1] = "back 1";
+    newList[2] = "back 2";
+    newList[3] = "back 3";
+    newList[4] = "back 4";
+    newList[5] = "back 5";
+    newList[6] = "back 6";
+    newList[7] = "back 7";
+    newList[8] = "back 8";
+    newList[9] = "back 9";
+
+    String[] array1 = stringList.toArray(newList);
+    System.out.println(array1);
+    for(String item : array1){
+      System.out.println(item);
+    }
+
+  }
+  public static void main(String[] args) {
+
+    Vector<Integer> v = new Vector<>(3, 2);
+
+    Stack<Integer> stack = new Stack<>();
+
+    stack.add(11);
+    stack.add(12);
+    stack.add(13);
+    stack.add(14);
+
+    while (!stack.isEmpty()) {
+      System.out.println(stack.pop());
+    }
+
 
 
   }
