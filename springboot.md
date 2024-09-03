@@ -56,6 +56,8 @@
     - Manage configurations using profiles for different environments (dev, test, prod).
 - **Introduction to SOLID Principles**
     - Overview of principles and their application in Spring Boot.
+- **Conversion Service**
+    - implementing the Converter<S,T> 
 
 ## 5. Building RESTful APIs with Spring Boot
 - **Creating REST Controllers**
@@ -65,6 +67,22 @@
 - **Exception Handling**
     - `@ControllerAdvice`: Global exception handling.
     - `@ExceptionHandler`, `@ResponseStatus`: Custom exception handling methods.
+
+- **Data Validation**
+  - **Overview of Data Validation**
+    - Importance and benefits of validating input data.
+  - **Using Java Bean Validation API**
+    - Introduction to `javax.validation.constraints` and using validation annotations (`@NotNull`, `@Size`, `@Min`, `@Max`, `@Pattern`).
+    - Example POJO with validation annotations.
+  - **Validating POJOs in Controllers**
+    - Using `@Valid` in REST controllers to trigger validation.
+  - **Handling Validation Errors**
+    - Customizing error responses with `@ControllerAdvice` and `@ExceptionHandler`.
+    - Example Exception Handler for `MethodArgumentNotValidException`.
+  - **Custom Validation Constraints**
+    - Creating custom validation annotations and validators.
+  - **Testing Validation**
+    - Writing tests to ensure validation rules are correctly applied. 
 
 ## 6. Data Persistence
 - **Spring Data JPA**
