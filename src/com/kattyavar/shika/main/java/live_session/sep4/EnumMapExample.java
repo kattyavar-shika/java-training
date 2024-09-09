@@ -33,7 +33,6 @@ public class EnumMapExample {
 
     System.out.println(enumMap);
 
-    Predicate<String> abc = s -> s.length() > 0;
 
   }
 }

@@ -428,3 +428,6 @@ public static void closureUsage() {
 ## static context
 
 ## instance method.
+
+
+# andThen, Compose

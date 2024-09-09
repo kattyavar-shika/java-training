@@ -61,12 +61,12 @@ public class IntoToLambda {
     //Note x should be final. If you try to change you will get compiler error.
 
     //What jvm will do at runtime it will replace i + x = i + 30.
-    closuresExample(10, (i)-> System.out.println(i + x));
+    closuresExample(10, (i) -> System.out.println(i + x));
 
   }
 
 
-  public static void closuresExample(int i, Consumer<Integer> consumer){
+  public static void closuresExample(int i, Consumer<Integer> consumer) {
     consumer.accept(i);
   }
 
@@ -82,8 +82,6 @@ public class IntoToLambda {
       consumer.accept(a); // This will call original pass lambda
     };
   }
-
-
 
 
 }
