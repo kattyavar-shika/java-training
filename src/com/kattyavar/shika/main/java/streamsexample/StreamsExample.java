@@ -144,7 +144,7 @@ public class StreamsExample {
     /***
      * If you want to perform some operations in parallel and then switch to sequential processing,
      * you can use .sequential() after you’ve done parallel operations.
-     * Note that .sequential() should be used before the terminal operation if you want to revert to sequential processing.
+     * javaNote that .sequential() should be used before the terminal operation if you want to revert to sequential processing.
      */
     List<String> productPriceList = getProducts()
       .stream() // Start with a sequential stream
