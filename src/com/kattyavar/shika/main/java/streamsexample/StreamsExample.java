@@ -1,10 +1,8 @@
 package com.kattyavar.shika.main.java.streamsexample;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.kattyavar.shika.main.java.streamsexample.Product.getProducts;
 
@@ -162,6 +160,52 @@ public class StreamsExample {
 
   }
 
+  static void handleNullListWithOutIfElse() {
+    //java 9 onwards..
+
+    //List<Product> list = Arrays.asList(new Product("p1", 10, null));
+    List<Product> list = Arrays.asList(new Product("p1", 10, null));
+
+    System.out.println(" product list " + list.stream()
+      .map(x -> x.getName())
+      .toList());
+
+
+    //Let assume we have list as null;
+
+    list = null;
+
+    //list.stream() this will throw error.
+
+    System.out.println("Input is null = " + Stream.ofNullable(list)
+      .flatMap(Collection::stream)
+      .peek(x -> System.out.println("In side the peek..."))
+      .map(x -> x.getName())
+      .collect(Collectors.toList()));
+
+    // or same can written as below..
+
+    System.out.println((list != null ? list.stream() : Stream.<Product>empty())
+      .peek(x -> System.out.println("In side the peek..."))
+      .map(x -> x.getName())
+      .collect(Collectors.toList()));
+
+
+    //or you can use generic method..
+
+
+    System.out.println(getStream(list)
+      .peek(x -> System.out.println("In side the peek..."))
+      .map(x -> x.getName())
+      .collect(Collectors.toList()));
+
+
+  }
+
+  static <T> Stream<T> getStream(List<T> list) {
+    return list != null ? list.stream() : Stream.empty();
+  }
+
   public static void main(String[] args) {
     //displayAllProductName();
     //productRatingHigherThan4();
@@ -170,7 +214,8 @@ public class StreamsExample {
     //listAllProductWithTherePrice();
     //countTheNumberOfReviewByProduct();
     //getAllReviewMoreThan3Rating();
-    parallelStreamOptions();
+    //parallelStreamOptions();
+    handleNullListWithOutIfElse();
   }
 }
 
