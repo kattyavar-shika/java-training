@@ -624,15 +624,8 @@ By incorporating these additional considerations, you can provide a more thoroug
 - **Java 10: Local Variable Type Inference (`var`)**
 - **Java 17: Sealed Classes, Record Classes**
 
-## 27. Best Practices and Code Conventions
-- **Java Naming Conventions**
-- **Effective Java: Key Principles**
 
-## 28. Hands-on Projects and Practice
-- **Practical Coding Exercises**
-- **Mini Projects for Real-World Applications**
-
-## 29. Advanced Topics (Optional)
+## 27. Advanced Topics (Optional)
 - **Reflection**
 - **Annotations Processing**
 - **Java Memory Management**
