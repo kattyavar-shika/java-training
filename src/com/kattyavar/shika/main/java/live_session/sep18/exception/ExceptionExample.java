@@ -131,3 +131,59 @@ class InvalidAgeException extends RuntimeException {
     super(message);
   }
 }
+
+class Base {
+
+  public String getData(Integer index) throws IOException {
+
+    if (index == 10 ){
+      //throw new IOException();
+    }
+    return "From Base";
+  }
+}
+
+class Derived extends Base {
+  @Override
+  public String getData(Integer index)  {
+    if (index == 10 ){
+      try {
+        throw new IOException();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+
+    return "From Derived";
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
