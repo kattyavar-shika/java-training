@@ -630,3 +630,51 @@ By incorporating these additional considerations, you can provide a more thoroug
 - **Annotations Processing**
 - **Java Memory Management**
 - **JVM Tuning and Profiling**
+
+
+## 28. Open topic
+- **Reference Type**
+  - **Strong** 
+  - **Week**
+  - **Soft**
+  - **Phantom**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
