@@ -18,7 +18,8 @@ public class Product {
 
     List<Review> reviewForLaptop = List.of(
       new Review("Person 1", 5, "Excellent laptop"),
-      new Review("Person 2", 4, "Very good, but a bit expensive")
+      new Review("Person 2", 4, "Very good, but a bit expensive"),
+      new Review("Person 3", 4, "Very good, but a bit expensive")
     );
 
     List<Review> reviewForSmartPhone = List.of(

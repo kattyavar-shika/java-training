@@ -202,6 +202,62 @@ public class StreamsExample {
 
   }
 
+  static void groupByRatingExample() {
+
+    Map<String, Map<Integer, List<Review>>> collect =
+      getProducts()
+        .stream()
+        .collect(Collectors.toMap(
+          product -> product.getName(),
+          product -> product.getReviews()
+            .stream()
+            .collect(Collectors.groupingBy(review -> review.getRating()))
+        ));
+
+    System.out.println(collect);
+
+
+  }
+
+  static void partitioningByExample() {
+    // Partitioning reviews by rating (above or below 4)
+    Map<String, Map<Boolean, List<Review>>> collect =
+      getProducts()
+        .stream()
+        .collect(
+          Collectors.toMap(
+            product -> product.getName(),
+            product -> product
+              .getReviews()
+              .stream()
+              .collect(Collectors.partitioningBy(review -> review.getRating() >= 4))
+          )
+        );
+
+    System.out.println("Result:");
+    System.out.println(collect);
+
+  }
+
+  static void filteringExample() {
+    // Using filtering collector to collect high-rated reviews
+
+    Map<String, List<Review>> collect = getProducts()
+      .stream()
+      .collect(
+        Collectors.toMap(
+          product -> product.getName(),
+          product -> product.getReviews()
+            .stream()
+            .filter(review -> review.getRating() >= 5)
+            .collect(Collectors.toList())
+        )
+      );
+
+    System.out.println("Result");
+    System.out.println(collect);
+  }
+
   static <T> Stream<T> getStream(List<T> list) {
     return list != null ? list.stream() : Stream.empty();
   }
@@ -215,7 +271,10 @@ public class StreamsExample {
     //countTheNumberOfReviewByProduct();
     //getAllReviewMoreThan3Rating();
     //parallelStreamOptions();
-    handleNullListWithOutIfElse();
+    //handleNullListWithOutIfElse();
+    //groupByRatingExample();
+    //partitioningByExample();
+    filteringExample();
   }
 }
 
