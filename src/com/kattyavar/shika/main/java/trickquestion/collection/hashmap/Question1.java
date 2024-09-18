@@ -73,7 +73,6 @@ public class Question1 {
      *
      * Question is why?
      */
-
   }
 }
 

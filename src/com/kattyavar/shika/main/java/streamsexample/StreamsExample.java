@@ -9,7 +9,9 @@ import static com.kattyavar.shika.main.java.streamsexample.Product.getProducts;
 public class StreamsExample {
 
   static void displayAllProductName() {
-    getProducts().stream().forEach(x -> System.out.println(x.getName()));
+    getProducts()
+      .stream()
+      .forEach(x -> System.out.println(x.getName()));
 
   }
 
@@ -18,7 +20,12 @@ public class StreamsExample {
 
     //If you are using java 8 to java 15 : use       .collect(Collectors.toList())
     // java 16 onwards use toList();
-    getProducts().stream().filter(p -> p.getReviews().stream().anyMatch(r -> r.getRating() >= 4))
+    getProducts()
+      .stream()
+      .filter(p -> p.getReviews()
+        .stream()
+        .anyMatch(r -> r.getRating() >= 4)
+      )
       //.collect(Collectors.toList())  // if you are using java 8 to java 15 then use this
       //.toList() // java 16 onwards use this..
       .toList().forEach(System.out::println);
@@ -27,14 +34,23 @@ public class StreamsExample {
 
   static void getAverageRatingForEachProduct() {
     //Get the average rating of reviews for each product:
-    Map<String, Double> collect = getProducts().stream().collect(Collectors.toMap(p -> p.getName(), p -> p.getReviews().stream().mapToInt(r -> r.getRating()).average().orElse(0.0)));
-
+    Map<String, Double> collect = getProducts()
+      .stream()
+      .collect(Collectors.toMap(
+        p -> p.getName(),
+        p -> p.getReviews()
+          .stream()
+          .mapToInt(r -> r.getRating())
+          .average()
+          .orElse(0.0))
+      );
     System.out.println("find out the Average rating by product " + collect);
   }
 
   static void findTheProductWithHigherPrice() {
     //Find the product with the highest price:
-    Optional<Product> max = getProducts().stream()
+    Optional<Product> max = getProducts()
+      .stream()
       //.max(Comparator.comparing(x -> x.getPrice())); // we can write same as using method ref..
       .max(Comparator.comparing(Product::getPrice));
 
@@ -44,7 +60,10 @@ public class StreamsExample {
 
   static void listAllProductWithTherePrice() {
     // List all products with their prices:
-    List<String> list = getProducts().stream().map(p -> p.getName() + ": $" + p.getPrice()).toList();
+    List<String> list = getProducts()
+      .stream()
+      .map(p -> p.getName() + ": $" + p.getPrice())
+      .toList();
 
     System.out.println(" Product with List => " + list);
 
@@ -52,7 +71,9 @@ public class StreamsExample {
 
   static void countTheNumberOfReviewByProduct() {
 
-    Map<String, Integer> collect = getProducts().stream().collect(Collectors.toMap(p -> p.getName(), p -> p.getReviews().size()));
+    Map<String, Integer> collect = getProducts()
+      .stream()
+      .collect(Collectors.toMap(p -> p.getName(), p -> p.getReviews().size()));
 
     System.out.println("Product with three review count " + collect);
 
@@ -60,8 +81,11 @@ public class StreamsExample {
 
   static void getAllReviewMoreThan3Rating() {
     //Get all reviews with a rating of 3 or higher:
-
-    List<Review> list = getProducts().stream().flatMap(p -> p.getReviews().stream()).filter(r -> r.getRating() >= 3).toList();
+    List<Review> list = getProducts()
+      .stream()
+      .flatMap(p -> p.getReviews().stream())
+      .filter(r -> r.getRating() >= 3)
+      .toList();
 
     System.out.println("Result = " + list);
 
@@ -70,9 +94,12 @@ public class StreamsExample {
   static void findAveragePriceOfProduct() {
     //Find the average price of products:
 
-    double average = getProducts().stream()
+    double average = getProducts()
+      .stream()
       //.mapToDouble(p -> p.getPrice()) // as this same line of code can be written as method ref
-      .mapToDouble(Product::getPrice).average().orElse(0.0);
+      .mapToDouble(Product::getPrice)
+      .average()
+      .orElse(0.0);
 
     System.out.println("Result = >" + average);
 
@@ -81,7 +108,12 @@ public class StreamsExample {
   static void getAllUserNameWhoHasGivenRatingMoreThan5() {
     //List all reviewers who have given a rating of 5:
 
-    List<String> list = getProducts().stream().flatMap(p -> p.getReviews().stream()).map(r -> r.getReviewerName()).distinct().toList();
+    List<String> list = getProducts()
+      .stream()
+      .flatMap(p -> p.getReviews().stream())
+      .map(r -> r.getReviewerName())
+      .distinct()
+      .toList();
 
     System.out.println("Result " + list);
   }
@@ -90,7 +122,10 @@ public class StreamsExample {
 
     //List all products that have reviews containing the word "price":
 
-    List<Product> price = getProducts().stream().filter(p -> p.getReviews().stream().anyMatch(r -> r.getComment().toLowerCase().contains("price"))).toList();
+    List<Product> price = getProducts()
+      .stream()
+      .filter(p -> p.getReviews().stream().anyMatch(r -> r.getComment().toLowerCase().contains("price")))
+      .toList();
 
     System.out.println("Result " + price);
   }
@@ -131,7 +166,7 @@ public class StreamsExample {
 
     list = getProducts()
       .stream() // It starts with a sequential stream
-      .parallel()  // It starts with a sequential stream and then explicitly makes it parallel. This is useful if you need to switch a specific stream from sequential to parallel within a larger pipeline.
+      .sequential()  // It starts with a sequential stream and then explicitly makes it parallel. This is useful if you need to switch a specific stream from sequential to parallel within a larger pipeline.
       .sorted(Comparator.comparingDouble(Product::getPrice))
       .toList();
     System.out.println("Result using parallelStream " + list);
@@ -175,6 +210,8 @@ public class StreamsExample {
 
     list = null;
 
+
+
     //list.stream() this will throw error.
 
     System.out.println("Input is null = " + Stream.ofNullable(list)
@@ -195,7 +232,7 @@ public class StreamsExample {
 
 
     System.out.println(getStream(list)
-      .peek(x -> System.out.println("In side the peek..."))
+      .peek(x -> System.out.println("In side the peek..."+ x))
       .map(x -> x.getName())
       .collect(Collectors.toList()));
 
