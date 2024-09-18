@@ -133,7 +133,23 @@ public class StreamingExample {
     //printInputData();
     //mapExample();
     //lazyExample();
-    distinctExample();
+    //distinctExample();
+
+
+    //Below code will not get executed...
+    Stream<Product> productStream = getProductData()
+      .stream()
+      .filter(p -> p.getPrice() > 300);
+
+
+    List<Product> result = new ArrayList<>();
+
+
+    List<Product> r1 = productStream
+      .parallel()
+      .toList();
+
+
   }
 
 
