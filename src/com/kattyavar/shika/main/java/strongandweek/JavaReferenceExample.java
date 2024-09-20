@@ -77,7 +77,6 @@ public class JavaReferenceExample {
      */
     // Create a ReferenceQueue
     ReferenceQueue<Employee> referenceQueue = new ReferenceQueue<>();
-
     // Create a PhantomReference to MyObject
     Employee myObject = new Employee("emp1", 11);
     PhantomReference<Employee> phantomRef = new PhantomReference<>(myObject, referenceQueue);

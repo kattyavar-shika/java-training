@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class ReadFromConsoleExample {
   public static void main(String[] args) {
     usingBufferReader();
-    usingScanner();
+    //usingScanner();
 
     //readFileUsingBufferReader();
     //readFileUsingScanner();

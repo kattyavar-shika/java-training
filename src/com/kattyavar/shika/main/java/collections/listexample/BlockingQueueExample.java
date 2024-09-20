@@ -3,7 +3,6 @@ package com.kattyavar.shika.main.java.collections.listexample;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.TimeUnit;
 
 public class BlockingQueueExample {
 
@@ -37,6 +36,7 @@ public class BlockingQueueExample {
 
   public static void main(String[] args) throws InterruptedException {
 
+    // basicOperation();
     BlockingQueue<String> blockingQueue = new ArrayBlockingQueue<>(10);
     //BlockingQueue<String> blockingQueue = new LinkedBlockingQueue<>();
     Thread provider = new Thread(() -> {
@@ -91,7 +91,7 @@ public class BlockingQueueExample {
           // if queue is empty it will wait for 1 seconds (As given time out) fro an element to become available.
           //Other wise you will get null if time expire and queue is empty.
           //In case of interrupt you will get Exceptions
-          blockingQueue.poll(1, TimeUnit.SECONDS);
+          //blockingQueue.poll(10, TimeUnit.SECONDS);
 
 
         } catch (InterruptedException e) {
