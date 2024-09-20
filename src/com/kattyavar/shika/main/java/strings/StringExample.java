@@ -58,7 +58,40 @@ public class StringExample {
   }
 
   public static void main(String[] args) {
-    internExample();
+    //internExample();
+    stringBuilderVsBuffer();
+  }
+
+  public static void stringBuilderVsBuffer() {
+
+    /**
+     * Thread-Safety:
+     *  StringBuilder: Not synchronized
+     *  StringBuffer : synchronized
+     *
+     *  Performance:
+     *    StringBuilder: Faster
+     *    StringBuffer: Slower
+     *
+     * Use StringBuilder for better performance in single-threaded scenarios.
+     * Use StringBuffer when you need thread safety in multi-threaded environments.
+     */
+
+    //StringBuilder Example
+    StringBuilder sbuilder = new StringBuilder();
+    sbuilder.append("Hello");
+    sbuilder.append(" ");
+    sbuilder.append("world");
+    System.out.println(sbuilder);
+
+    //String buffer
+    StringBuffer sbuffer = new StringBuffer();
+    sbuffer.append("Hello");
+    sbuffer.append(" ");
+    sbuffer.append("world");
+    System.out.println(sbuffer);
+
+
   }
 
   static void internExample() {
