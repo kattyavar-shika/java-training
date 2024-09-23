@@ -1,12 +1,14 @@
 package com.kattyavar.shika.main.java.solid.employeeexample.dip.problem;
 
-import com.kattyavar.shika.main.java.solid.employeeexample.srp.solution.EmailService;
 import com.kattyavar.shika.main.java.solid.employeeexample.srp.solution.Employee;
-import com.kattyavar.shika.main.java.solid.employeeexample.srp.solution.EmployeeRepository;
 
 public class Problem {
 
   public static void main(String[] args) {
+    System.out.println("Min Valus " + Double.MIN_VALUE);
+    double minValue = Double.MIN_VALUE;
+    System.out.printf("Double.MIN_VALUE in scientific notation: %.2e%n", minValue);
+
     System.out.println(Math.min(Double.MIN_VALUE, 0.0d));
   }
 }
@@ -27,5 +29,17 @@ class EmployeeService {
 
     EmailService emailService = new EmailService();
     emailService.sendWelcomeEmail(employee);
+  }
+}
+
+class EmployeeRepository {
+  public void saveToDatabase(Employee employee) {
+    // Save employee record to database.
+  }
+}
+
+class EmailService {
+  public void sendWelcomeEmail(Employee employee) {
+    // Send welcome email logic.
   }
 }

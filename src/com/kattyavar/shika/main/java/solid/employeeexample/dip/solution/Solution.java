@@ -1,8 +1,5 @@
 package com.kattyavar.shika.main.java.solid.employeeexample.dip.solution;
 
-import com.kattyavar.shika.main.java.solid.employeeexample.isp.solution.DatabaseOperations;
-import com.kattyavar.shika.main.java.solid.employeeexample.srp.solution.EmailService;
-import com.kattyavar.shika.main.java.solid.employeeexample.srp.solution.Employee;
 
 public class Solution {
 }
@@ -22,3 +19,24 @@ class EmployeeService {
   }
 }
 
+class Employee {
+  private String name;
+  private String department;
+  private double salary;
+
+  public Employee(String name, String department, double salary) {
+    this.name = name;
+    this.department = department;
+    this.salary = salary;
+  }
+}
+
+interface DatabaseOperations {
+  void saveToDatabase(Employee employee);
+}
+
+class EmailService {
+  public void sendWelcomeEmail(Employee employee) {
+    // Send welcome email logic.
+  }
+}
