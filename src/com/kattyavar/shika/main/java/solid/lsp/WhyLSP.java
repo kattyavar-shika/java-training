@@ -108,7 +108,7 @@ public class WhyLSP {
 
   }
 
-  void anotherExampleSolution () {
+  void anotherExampleSolution() {
 
   }
 }
