@@ -1,6 +1,6 @@
-package com.kattyavar.shika.main.java.solid.employeeexample.ocp.problem;
+package com.kattyavar.shika.main.java.solid.problem.with.solution.ocp.problem;
 
-import com.kattyavar.shika.main.java.solid.employeeexample.srp.solution.Employee;
+import com.kattyavar.shika.main.java.solid.problem.with.solution.srp.solution.Employee;
 
 /**
  * Problem: The salary calculation logic is hard-coded into one method,

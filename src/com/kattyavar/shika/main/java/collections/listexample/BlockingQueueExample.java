@@ -74,6 +74,14 @@ public class BlockingQueueExample {
       }
     });
 
+
+    Thread newThread = new Thread(){
+      @Override
+      public void run() {
+        super.run();
+      }
+    };
+
     Thread consumer = new Thread(() -> {
 
       while (true) {
@@ -124,3 +132,4 @@ public class BlockingQueueExample {
 
 
 }
+

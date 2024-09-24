@@ -1,4 +1,4 @@
-package com.kattyavar.shika.main.java.solid.employeeexample.srp.solution;
+package com.kattyavar.shika.main.java.solid.problem.with.solution.srp.solution;
 
 public class Employee {
   private String name;

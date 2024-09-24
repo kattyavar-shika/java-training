@@ -1,6 +1,6 @@
-package com.kattyavar.shika.main.java.solid.employeeexample.ocp.solution;
+package com.kattyavar.shika.main.java.solid.problem.with.solution.ocp.solution;
 
-import com.kattyavar.shika.main.java.solid.employeeexample.srp.problem.Employee;
+import com.kattyavar.shika.main.java.solid.problem.with.solution.srp.problem.Employee;
 
 public class OPCSolution {
 }

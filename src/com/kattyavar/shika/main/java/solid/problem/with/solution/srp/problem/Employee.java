@@ -1,4 +1,4 @@
-package com.kattyavar.shika.main.java.solid.employeeexample.srp.problem;
+package com.kattyavar.shika.main.java.solid.problem.with.solution.srp.problem;
 
 /**
  * Problem: The original Employee class does too much:
