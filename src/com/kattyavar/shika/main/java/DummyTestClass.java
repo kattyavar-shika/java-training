@@ -3,6 +3,10 @@ package com.kattyavar.shika.main.java;
 public class DummyTestClass {
   public static void main(String[] args) {
 
+
+  }
+
+  static void testTryCatchWithSystemExit() {
     System.out.println("Calling method");
     testFinallyInCaseOfReturn();
     System.out.println("Method called");
