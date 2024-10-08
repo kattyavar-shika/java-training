@@ -2,6 +2,11 @@ package com.kattyavar.shika.main.java.solid.problem.with.solution.lsp.problem;
 
 public class Problem {
   public static void main(String[] args) {
+
+    Vehicle vehicle = new TataEv();
+
+    vehicle.refuel();
+
     refuelVehicle(new SwiftCar()); //Work fine
 
     refuelVehicle(new TataEv()); // This will not work

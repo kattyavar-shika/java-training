@@ -1,8 +1,15 @@
 package com.kattyavar.shika.main.java.live_session.sep25.solid.isp.problem;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Problem {
   public static void main(String[] args) {
 
+    List<String> list = Arrays.asList("one", "two", "three");
+
+    list.add("Five");
   }
 }
 
