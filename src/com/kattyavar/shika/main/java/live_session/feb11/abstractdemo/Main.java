@@ -1,5 +1,7 @@
 package com.kattyavar.shika.main.java.live_session.feb11.abstractdemo;
 
+import java.util.LinkedList;
+
 public class Main {
   public static void main(String[] args) {
 
@@ -7,10 +9,9 @@ public class Main {
     //Derived1 obj = new Derived1();
     Base1 obj = new Derived1();
 
-    obj.getVar();
+    //obj.getVar();
 
-    System.out.println(obj.abc); // 21
-
+    LinkedList<String> list;
   }
 }
 
