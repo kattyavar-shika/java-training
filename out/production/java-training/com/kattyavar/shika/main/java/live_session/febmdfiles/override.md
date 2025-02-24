@@ -125,3 +125,59 @@ class C implements A, B {
 - As a result, no diamond problem existed because there were no conflicts between method implementations from multiple interfaces.
 - The diamond problem only arises after Java 8, when interfaces were allowed to have default methods, which can provide concrete implementations.
 
+
+
+# Exception Handling in Overriding Methods
+
+In Java, when you override a method from a superclass, the subclass method can have exceptions.  
+However, there are rules about what exceptions the overridden method can throw, and these rules are tied to the **exceptions** thrown by the method in the superclass.
+
+## Key Points:
+
+- 1 Covariant Return Type:
+  - The return type of the overridden method can be a subclass of the return type of the original method (known as covariant return type).
+  - This does not directly affect the exception handling but is good to keep in mind while overriding methods.
+
+- 2 Checked Exceptions:
+  - If the superclass method declares checked exceptions, the subclass overriding method can only throw the same exceptions or subclasses of those exceptions.
+  - You cannot add new checked exceptions that are not declared in the superclass method.
+
+- 3 Unchecked Exceptions:
+  - The subclass overriding method can throw unchecked exceptions (i.e., RuntimeException and its subclasses) regardless of whether the superclass method throws them or not.
+  - There is no restriction on throwing unchecked exceptions during method overriding.
+
+
+## Rule of Overriding with Exceptions:
+- **If the superclass method does not throw any exceptions**, the overriding method in the subclass should ideally not throw any exceptions (although unchecked exceptions can still be thrown).
+- If the superclass method throws exceptions, the subclass method can:
+  - Throw the same exceptions or subtypes of the exceptions thrown by the superclass method.
+  - Throw fewer exceptions (i.e., it can omit some exceptions thrown by the superclass method but still handle the same ones).
+  - Cannot throw more general exceptions. For example, if the superclass method throws IOException, the subclass cannot throw Exception.
+
+
+
+
+
+| **Use Case No.** | **Base Class Exception Declaration**  | **Derived Class Exception Declaration**         | **Allowed/Not Allowed**    |
+|------------------|---------------------------------------|-------------------------------------------------|----------------------------|
+| 1                | Throws a checked exception (e.g., `IOException`) | Throws the same checked exception (e.g., `IOException`) | **Allowed**                |
+| 2                | Throws a checked exception (e.g., `IOException`) | Throws a subtype of the checked exception (e.g., `FileNotFoundException`) | **Allowed**                |
+| 3                | Throws a checked exception (e.g., `IOException`) | Throws a broader checked exception (e.g., `Exception`) | **Not Allowed**            |
+| 4                | Throws a checked exception (e.g., `IOException`) | Throws an unchecked exception (e.g., `RuntimeException`) | **Allowed**                |
+| 5                | Throws a checked exception (e.g., `IOException`) | Throws no exception at all | **Allowed**                |
+| 6                | Throws no exception at all | Throws any checked exception (e.g., `IOException`) | **Not Allowed**            |
+| 7                | Throws no exception at all | Throws an unchecked exception (e.g., `RuntimeException`) | **Allowed**                |
+| 8                | Throws an unchecked exception (e.g., `ArrayIndexOutOfBoundsException`) | Throws a broader unchecked exception (e.g., `RuntimeException`) | **Allowed**                |
+
+
+
+
+## Key points : 
+  - **Checked exceptions**: The subclass method must throw the same or a subclass of the exceptions thrown by the superclass. It cannot throw a broader checked exception or new checked exceptions that aren't declared in the superclass method.
+  - **Unchecked exceptions**: The subclass method can throw unchecked exceptions freely, even if the superclass method does not throw them.
+
+
+
+
+
+
