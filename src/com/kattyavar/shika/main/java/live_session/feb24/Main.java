@@ -1,13 +1,16 @@
 package com.kattyavar.shika.main.java.live_session.feb24;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Vector;
 
 public class Main {
-  public static void main(String[] args) {
+
+  static void tryThis(Base obj) {
+    System.out.println(obj.name);
+  }
+
+  static void check1() {
+
 
     Derived obj = new Derived();
     System.out.println("Derived name -> " + obj.getName());
@@ -25,11 +28,43 @@ public class Main {
     new Vector<>();
 
   }
+
+  static void check2() {
+    String a = "Hello ";
+    System.out.println("String a = " + a);
+
+    a = a + " World";
+
+    System.out.println("String a = " + a);
+
+
+    a = "Welcome to India..";
+
+    System.out.println("String a = " + a);
+  }
+
+  public static void main(String[] args) {
+
+    String a = "Test";
+    String b = "Test";
+
+    String c = new String("Test");
+
+    c = a.intern();
+
+
+    if (a.equals(c)){
+
+    }
+
+    System.out.println("a == c  ====> " + (a == c));
+
+
+  }
 }
 
 
-
-class Base  {
+class Base {
   protected String name;
   private String lastName;
 
