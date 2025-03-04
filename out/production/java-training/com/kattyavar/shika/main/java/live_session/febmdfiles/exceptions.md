@@ -238,3 +238,16 @@ public class TryWithResourcesMultiple {
 
 
 
+
+## Final Takeaways
+
+| Exception Type                  | Should You Catch It?  | When to Catch It? |
+|----------------------------------|----------------------|-------------------|
+| `NullPointerException`           | ✅ Yes, if avoidable | Handle bad input, prevent crashes |
+| `ArrayIndexOutOfBoundsException` | ✅ Yes              | Handle incorrect array access |
+| `IOException`                    | ✅ Yes              | Handle file or network issues |
+| `StackOverflowError`             | 🚫 Usually No       | Only for logging, multi-threading |
+| `OutOfMemoryError`               | 🚫 Usually No       | Only for logging, graceful shutdown |
+| `VirtualMachineError`            | 🚫 No               | JVM failure, cannot recover |
+
+
