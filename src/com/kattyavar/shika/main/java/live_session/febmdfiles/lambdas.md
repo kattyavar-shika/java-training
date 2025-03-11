@@ -478,9 +478,9 @@ public static void closureUsage() {
 
 # Do we have this for lambda in following case ?
 
-## static context
+### static context
 
-## instance method.
+### instance method.
 
 ```java
  import java.util.function.Consumer;
@@ -536,7 +536,7 @@ class LambdaExample {
 ```
 
 
-# andThen
+# andThen usage Example
 
 ```java
 
