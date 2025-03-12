@@ -22,7 +22,6 @@ public class Main2 {
   }
 }
 
-
 interface TestExample {
   String applyOperation(String input, Integer input2);
 
@@ -37,6 +36,5 @@ interface TestExample {
   default void canWeHaveDefaultmethod() {
 
   }
-
 }
 
