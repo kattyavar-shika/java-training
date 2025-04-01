@@ -1,5 +1,8 @@
 package com.kattyavar.shika.main.java.live_session.mar11.lambdaexample;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main2 {
 
   String name;
@@ -20,6 +23,23 @@ public class Main2 {
     };
 
   }
+}
+
+class Test {
+  // I hope you can read me ...
+
+  List<String> list = new ArrayList();
+
+  void test(){
+    list.add("New string item");
+
+
+  }
+
+  void display(){
+    System.out.println(list);
+  }
+
 }
 
 interface TestExample {
