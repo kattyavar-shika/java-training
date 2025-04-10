@@ -1151,6 +1151,41 @@ public class TreeMapExample {
 }
 
 ```
+
+another example 
+
+```java
+
+public class Main {
+
+  public static void main(String[] args) throws InterruptedException {
+    Map<Temp, Integer> map = new TreeMap<>(Comparator.comparing(a -> a.name));
+    //Map<Temp, Integer> map = new TreeMap<>((a,b ) -> a.name.compareTo(b.name));
+
+    // Adding key-value pairs
+    map.put(new Temp("Apple"), 1);
+    map.put(new Temp("Banana"), 2);
+    map.put(new Temp("Cherry"), 3);
+
+    // Iterating over key-value pairs (in sorted order)
+    for (Map.Entry<Temp, Integer> entry : map.entrySet()) {
+      System.out.println(entry.getKey() + ": " + entry.getValue());
+    }
+
+
+  }
+}
+
+class Temp {
+  String name;
+
+  public Temp(String name) {
+    this.name = name;
+  }
+}
+
+```
+
 Performance Considerations:
 - Insertion/Search/Deletion: O(log n) due to the underlying tree structure.
 - Memory: Uses more memory than HashMap and LinkedHashMap due to the tree structure.
@@ -1170,21 +1205,34 @@ WeakHashMap is a specialized implementation of the Map interface that uses weak 
 import java.util.*;
 
 public class WeakHashMapExample {
-    public static void main(String[] args) {
-        Map<String, Integer> map = new WeakHashMap<>();
+  public static void main(String[] args) throws InterruptedException {
+    // Create a WeakHashMap
+    Map<Object, Integer> map = new WeakHashMap<>();
 
-        // Adding key-value pairs
-        map.put("Apple", 1);
-        map.put("Banana", 2);
-        
-        // Simulating the behavior of weak references by nullifying a key reference
-        String key = "Cherry";
-        map.put(key, 3);
-        key = null;  // Now the "Cherry" key is eligible for garbage collection
+    // Adding key-value pairs
+    map.put("Apple", 1);
+    map.put("Banana", 2);
 
-        // Display the map (it may or may not contain the "Cherry" entry after GC)
-        System.out.println(map);
-    }
+    // Simulating the behavior of weak references by nullifying a key reference
+    Object key = new String("Cherry");  // This creates a non-interned string
+    map.put(key, 3);
+
+    System.out.println("Before marking reference as null");
+    System.out.println(map);
+
+    // Nullifying the strong reference to the key
+    key = null;  // Now, the "Cherry" key is eligible for garbage collection
+
+    // Suggesting the garbage collector to run
+    System.gc();  // Hint to JVM to run GC
+    Thread.sleep(3000);  // Sleep to give GC time
+
+    // Print the map after GC
+    System.out.println("After marking reference as null");
+    System.out.println(map);  // Cherry key should be removed if GC runs
+
+
+  }
 }
 
 ```
