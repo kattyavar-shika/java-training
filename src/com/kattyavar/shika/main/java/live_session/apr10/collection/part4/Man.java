@@ -5,7 +5,7 @@ import java.util.*;
 public class Man {
   public static void main(String[] args) {
     //Queue<Integer> queue = new PriorityQueue<>(Comparator.reverseOrder());
-    Queue<Integer> queue = new ArrayDeque<>();
+    ArrayDeque<Integer> queue = new ArrayDeque<>();
 
     new Stack<>();
 
