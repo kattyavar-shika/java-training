@@ -208,7 +208,7 @@ public class ConcurrentModificationExample {
             if (lang.equals("Python")) {
                 // Modifying the list during iteration
                 languages.add(lang); // 💥 This will throw ConcurrentModificationException
-               // languages.remove(lang); // 💥 This will throw ConcurrentModificationException java 8, if you try on java 21 you will not get error.
+               // languages.remove(lang); // 💥 This will throw ConcurrentModificationException java 8 (Please check this .. 21 onwards..), if you try on java 21 you will not get error.
             }
         }
     }
