@@ -241,6 +241,8 @@ Stream<Integer> unique = Stream.of(1, 2, 2, 3).distinct();
 
 ```
 
+Note: Without overriding equals() and hashCode(), distinct() would treat all objects as different.
+
 ## 5. limit() and skip()
 
 ```java
