@@ -208,3 +208,41 @@ double area = switch (shape) {
 
 But this should be avoided in final code when working with sealed types, unless you're handling external subtypes via reflection or dynamic logic.
 
+
+```java
+enum Day { MONDAY, TUESDAY,WEDNESDAY, THURSDAY,  FRIDAY, SATURDAY, SUNDAY }
+
+static void handle(Day day) {
+    switch (day) {
+        case MONDAY -> System.out.println("Back to work!");
+        case TUESDAY, WEDNESDAY, THURSDAY, FRIDAY -> System.out.println("Midweek grind");
+        case SATURDAY, SUNDAY -> System.out.println("Weekend vibes!");
+    }
+}
+
+```
+
+or you do it this way . 
+
+```java
+static void handle(Object obj) {
+    switch (obj) {
+        case Day d when d == Day.MONDAY -> System.out.println("Back to work!");
+        case Day d -> System.out.println("Just another day: " + d);
+        case String s -> System.out.println("String: " + s);
+        default -> System.out.println("Unknown type");
+    }
+}
+
+```
+
+Which case gets priority?
+
+The first case with the guard (when) gets higher priority.
+
+In the first case: case Day d when d == Day.MONDAY, you're first checking if obj is a Day, and then you're guarding it with the condition d == Day.MONDAY. So this case will match only when the obj is of type Day and it specifically equals Day.MONDAY.
+
+The second case: case Day d, will match any Day (except for the case where it's already matched by the first case).
+
+
+
