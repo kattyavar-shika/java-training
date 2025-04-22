@@ -231,3 +231,20 @@ This change helps reduce verbosity and makes type checking and casting much easi
 
 
 
+# Java 17+/21: Pattern Matching in switch
+
+And now you can take it even further — use it inside a switch!
+
+```java
+static void handle(Object obj) {
+    switch (obj) {
+        case String s -> System.out.println("String length: " + s.length());
+        case Integer i -> System.out.println("Integer doubled: " + (i * 2));
+        case null -> System.out.println("It's null!");
+        default -> System.out.println("Unknown type");
+    }
+}
+
+```
+
+Super expressive, concise, and type-safe — no need for cascading if-else blocks anymore.
