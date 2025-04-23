@@ -226,3 +226,134 @@ Each class now focuses on a single responsibility, making the code easier to mai
 
 
 
+
+# Open/Closed Principle (OCP)
+
+The Open/Closed Principle states that software entities should be open for extension but closed for modification.   
+
+This means that you should be able to extend the functionality of a class without modifying its existing code.   
+By doing so, we ensure that the system remains stable and maintainable while allowing new features to be added without altering existing code.
+
+
+## Problem (Violation of OCP)
+In the original code, the salary calculation logic is tightly coupled with a single method (calculateSalary), which makes it difficult to extend if we need different types of salary calculations in the future.   
+If we wanted to add new salary calculation logic (for example, for contract-based employees or commission-based employees), we would have to modify the SalaryCalculator class directly, violating the Open/Closed Principle.
+
+```java
+/**
+ * Problem: The salary calculation logic is hard-coded into one method,
+ * making it difficult to extend for different types of salary calculations.
+ */
+
+/**
+ * Importance: OCP states that software entities (classes, modules, functions, etc.)
+ * should be open for extension but closed for modification.
+ * This means you can add new functionality without changing existing code.
+ */
+class SalaryCalculator {
+  public double calculateSalary(Employee employee) {
+    // Fixed salary calculation logic
+    return employee.getSalary();
+  }
+}
+
+```
+
+## Violation of OCP
+
+Problem: If we want to add new types of salary calculations (e.g., hourly-based or commission-based), we would have to modify the SalaryCalculator class, which violates the principle of being closed for modification.
+
+## Solution (Refactored Version - Applying OCP)
+
+To adhere to OCP, we need to make the SalaryCalculator class open for extension (i.e., new types of salary calculations can be added), but closed for modification (i.e., we should not modify existing code).
+
+We can achieve this by using interfaces or abstract classes. Here's the refactored solution:
+
+```java
+public class OPCSolution {
+
+    interface SalaryCalculator {
+        double calculateSalary(Employee employee);
+    }
+
+    class FixedSalaryCalculator implements SalaryCalculator {
+        @Override
+        public double calculateSalary(Employee employee) {
+            // Implement logic for fixed salary employee.
+            return employee.getSalary();
+        }
+    }
+
+    class HourlySalaryCalculator implements SalaryCalculator {
+        @Override
+        public double calculateSalary(Employee employee) {
+            // Logic for hourly employees
+            return employee.getSalary() * 20; // Example calculation
+        }
+    }
+
+    // New implementation for Commission-based salary calculation
+    class CommissionSalaryCalculator implements SalaryCalculator {
+        @Override
+        public double calculateSalary(Employee employee) {
+            // Commission-based salary logic
+            return employee.getSalary() + (employee.getSalary() * 0.10); // Example calculation
+        }
+    }
+
+    // Employee class remains the same
+    public class Employee {
+        private String name;
+        private String department;
+        private double salary;
+
+        public Employee(String name, String department, double salary) {
+            this.name = name;
+            this.department = department;
+            this.salary = salary;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getDepartment() {
+            return department;
+        }
+
+        public void setDepartment(String department) {
+            this.department = department;
+        }
+
+        public double getSalary() {
+            return salary;
+        }
+
+        public void setSalary(double salary) {
+            this.salary = salary;
+        }
+    }
+}
+
+``` 
+
+**Explanation of the Solution:**
+- SalaryCalculator Interface:
+  - This interface provides a contract for different types of salary calculations.
+  - It ensures that each salary calculation type (fixed, hourly, commission) implements the calculateSalary method.
+
+
+
+
+## Conclusion
+
+By applying the Open/Closed Principle (OCP), we ensure that our system is both flexible and stable.   
+The SalaryCalculator is now open for extension, allowing us to add new salary calculation types without modifying existing code.   
+This makes the codebase easier to maintain and extend, ensuring that the addition of new features won't introduce unexpected side effects.
+
+
+
