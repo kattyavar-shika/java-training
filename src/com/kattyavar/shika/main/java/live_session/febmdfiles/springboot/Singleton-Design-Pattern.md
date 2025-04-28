@@ -216,5 +216,11 @@ Summary:
 - The **volatile** keyword prevents reordering of instructions and guarantees that the reference is assigned only after the object is fully constructed, ensuring Thread B always sees a fully initialized object.
 
 
+# Key Differences between a volatile variable and a normal variable:
+
+- Normal Variable: When one thread updates the value of a normal variable, the change might not be visible to other threads immediately, due to caching or optimizations done by the JVM or the CPU. Each thread could have its own cached copy of the variable.
+
+- Volatile Variable: When a variable is declared as volatile, any read or write to the variable is directly performed on the main memory (i.e., the heap). This ensures that all changes to the variable are immediately visible to all other threads. The JVM ensures that the value is read from and written to the main memory directly, not cached in registers or CPU caches.
+
 
 
