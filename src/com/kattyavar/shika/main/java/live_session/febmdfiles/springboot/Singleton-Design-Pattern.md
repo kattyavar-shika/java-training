@@ -206,6 +206,15 @@ This can happen because assigning the reference is a quick operation compared to
 
 
 
+Summary: 
+
+- The JVM can reorder instructions to optimize performance, which can cause issues when dealing with object creation in multithreaded environments.
+
+- Without volatile, the JVM may assign the reference to the object before the object is fully initialized, causing Thread B to see a partially initialized object.
+
+
+- The **volatile** keyword prevents reordering of instructions and guarantees that the reference is assigned only after the object is fully constructed, ensuring Thread B always sees a fully initialized object.
+
 
 
 
