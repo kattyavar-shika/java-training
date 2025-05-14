@@ -18,18 +18,18 @@ It is built on top of the Spring Framework and simplifies the process of develop
 
 Comparison of Spring Boot and Spring Framework
 
-  | Feature/Aspect         | Spring Framework                      | Spring Boot                          |
-      |------------------------|---------------------------------------|--------------------------------------|
-  | **Configuration**      | Requires extensive XML or Java-based configuration. | Simplifies configuration with auto-configuration and annotations. |
-  | **Setup Time**         | More time-consuming setup due to manual configurations. | Quick setup with Spring Initializr and embedded server options. |
-  | **Project Structure**  | Flexible structure; can be complex based on project requirements. | Opinionated project structure with a standard convention. |
-  | **Dependency Management** | Manual management of dependencies; may require additional configuration. | Dependency management handled automatically with a starter dependency system. |
-  | **Embedded Server**    | Requires separate configuration to run on an embedded server. | Comes with embedded servers (Tomcat, Jetty, etc.) out of the box. |
-  | **Microservices Support** | Supports microservices but requires more configuration. | Designed for microservices with features like Spring Cloud integration. |
-  | **Development Speed**  | Slower development due to extensive boilerplate code. | Faster development with less boilerplate and rapid prototyping. |
-  | **Testing Support**    | Requires configuration for testing components. | Provides built-in support for testing with annotations like `@SpringBootTest`. |
-  | **Community & Ecosystem** | Large community, but Spring Boot has become the preferred choice. | Rapidly growing community; increasingly preferred for new applications. |
-  | **Learning Curve**     | Steeper learning curve due to complexity. | Easier to learn due to simplified features and clear documentation. |
+| Feature/Aspect         | Spring Framework                      | Spring Boot                          |
+|------------------------|---------------------------------------|--------------------------------------|
+| **Configuration**      | Requires extensive XML or Java-based configuration. | Simplifies configuration with auto-configuration and annotations. |
+| **Setup Time**         | More time-consuming setup due to manual configurations. | Quick setup with Spring Initializr and embedded server options. |
+| **Project Structure**  | Flexible structure; can be complex based on project requirements. | Opinionated project structure with a standard convention. |
+| **Dependency Management** | Manual management of dependencies; may require additional configuration. | Dependency management handled automatically with a starter dependency system. |
+| **Embedded Server**    | Requires separate configuration to run on an embedded server. | Comes with embedded servers (Tomcat, Jetty, etc.) out of the box. |
+| **Microservices Support** | Supports microservices but requires more configuration. | Designed for microservices with features like Spring Cloud integration. |
+| **Development Speed**  | Slower development due to extensive boilerplate code. | Faster development with less boilerplate and rapid prototyping. |
+| **Testing Support**    | Requires configuration for testing components. | Provides built-in support for testing with annotations like `@SpringBootTest`. |
+| **Community & Ecosystem** | Large community, but Spring Boot has become the preferred choice. | Rapidly growing community; increasingly preferred for new applications. |
+| **Learning Curve**     | Steeper learning curve due to complexity. | Easier to learn due to simplified features and clear documentation. |
 
  
 
