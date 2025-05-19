@@ -240,3 +240,77 @@ Workaround: Move the logic to non-static methods if AOP is required.
 | Proxy configuration mismatch (JDK vs. CGLIB)     | Spring can’t apply advice in some proxy situations |
 
 
+
+# General Format of execution Expression
+
+```java
+execution(modifiers-pattern? return-type-pattern declaring-type-pattern method-name-pattern(param-pattern) throws-pattern?)
+
+```
+
+Mandatory Parts:
+
+- return-type-pattern:
+  - Mandatory: This part specifies the return type of the method.
+  - Example: void, int, String, * (any return type).
+
+- declaring-type-pattern:
+  - Mandatory: This part specifies the class or package in which the method is declared.
+  - Example: com.example.service.UserService, * (any class), com.example.service.* (any class in the com.example.service package).
+
+- method-name-pattern:
+  - Mandatory: This part specifies the name of the method to match.
+  - Example: save, get*, * (any method).
+
+- param-pattern:
+  - Mandatory: This part specifies the method's parameter types. While it can match any parameters using (..), it's still required to have some form of parameter pattern.
+  - Example: String, (String, int), (..) (matches any parameters).
+
+Optional Parts:
+
+- modifiers-pattern?:
+  - Optional: This part allows you to specify modifiers such as public, private, protected, static, final, etc. If omitted, it will match methods regardless of their modifiers.
+  - Example: public, private, protected, etc. Or just omit it to match any modifier.
+
+- throws-pattern?:
+  - Optional: This part allows you to specify exceptions that the method might throw. If omitted, it will match methods regardless of whether they throw exceptions or not.
+  - Example: IOException, * (any exception), or simply omit it.
+
+
+
+Example with Optional and Mandatory Parts:
+
+Matching any method in the com.example.service package (All mandatory):
+
+```java
+execution(* com.example.service.*.*(..))
+
+```
+
+Matching public methods only (with optional modifiers-pattern):
+
+```java
+execution(public * com.example.service.*.*(..))
+
+```
+
+Matching methods with a specific return type (void):
+
+```java
+execution(void com.example.service.*.*(..))
+
+```
+
+Matching methods in a specific class (with mandatory class pattern and any return type, name, and parameters):
+
+```java
+execution(* com.example.service.UserService.*(..))
+
+```
+
+Matching methods that throw a specific exception (with optional throws-pattern):
+
+```java
+execution(* com.example.service.*.*(..) throws IOException)
+
+```
