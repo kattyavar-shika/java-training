@@ -1,4 +1,14 @@
 
+# JPA vs Hibernate — Simple Explanation
+
+| **JPA**                                                                                 | **Hibernate**                                   |
+|-----------------------------------------------------------------------------------------|------------------------------------------------|
+| Java Specification/Standard for ORM (Object-Relational Mapping).                        | A popular implementation of the JPA specification. |
+| Defines a set of interfaces and rules for working with databases in Java.               | Provides the actual code and tools that implement JPA interfaces. |
+| You program to the JPA interfaces, which makes your code portable across different JPA providers. | One of several JPA providers (others include EclipseLink, OpenJPA). |
+| Comes bundled with Java EE and is part of Spring Boot starters.                         | Third-party library that you add to your project (usually as a dependency). |
+
+
 # @Entity Annotation in Spring Data JPA 
 
 The @Entity annotation in JPA (Java Persistence API) is used to indicate that a class is an entity and should be mapped to a database table.
@@ -1364,4 +1374,22 @@ orderRepository.save(order);  // save order separately
 - You must manage saving parent and child separately.
 
 
+
+
+# What is Transaction Propagation?
+
+When a method annotated with @Transactional calls another method that is also transactional, Spring needs to decide how to handle the transactions — whether to use the existing one or create a new one. This behavior is called transaction propagation.
+
+
+# Common Propagation Types
+
+| **Propagation Type**   | **Description**                                                          |
+|-----------------------|--------------------------------------------------------------------------|
+| REQUIRED (default)     | Join the existing transaction if one exists; else create a new one.     |
+| REQUIRES_NEW           | Suspend the current transaction and create a new one.                   |
+| SUPPORTS               | Join the existing transaction if one exists; else execute non-transactionally. |
+| NOT_SUPPORTED          | Execute non-transactionally, suspending any existing transaction.       |
+| MANDATORY              | Must run within an existing transaction; throws exception if none exists. |
+| NEVER                  | Must run outside of a transaction; throws exception if a transaction exists. |
+| NESTED                 | Execute within a nested transaction if a current transaction exists.    |
 
