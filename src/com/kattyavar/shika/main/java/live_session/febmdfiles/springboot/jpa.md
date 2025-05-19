@@ -1391,3 +1391,162 @@ When a method annotated with @Transactional calls another method that is also tr
 | MANDATORY              | Must run within an existing transaction; throws exception if none exists. | Enforce transaction presence; e.g., methods that require transactional context. |
 | NEVER                  | Must run outside of a transaction; throws exception if a transaction exists. | Operations that must not run within transactions (rare cases).       |
 | NESTED                 | Execute within a nested transaction if a current transaction exists.    | Partial rollback scenarios; nested operations inside larger transactions. |
+
+
+Some more example 
+
+
+# REQUIRED
+
+Behavior
+- If a transaction exists, it will join the existing one.
+- If no transaction exists, a new transaction will be created.
+
+**Use Case**
+- Most common case: You have multiple operations that need to be executed in a single transaction, and all operations should commit or roll back together.
+
+```java
+@Transactional
+public void processOrder(Order order) {
+    inventoryService.updateInventory(order);  // Joins the current transaction (REQUIRED)
+    paymentService.processPayment(order);     // Joins the current transaction (REQUIRED)
+    invoiceService.createInvoice(order);      // Joins the current transaction (REQUIRED)
+}
+
+```
+
+# REQUIRES_NEW
+
+Behavior
+- Suspend the current transaction (if one exists) and create a new transaction.
+- If the new transaction commits or fails, the outer transaction is unaffected.
+
+**Use Case**
+
+- Independent operations: You want to perform an operation that must always succeed, regardless of the success or failure of the parent transaction. For example, logging or audit logging, which should commit even if the main business operation fails.
+
+```java
+@Transactional
+public void processOrder(Order order) {
+    inventoryService.updateInventory(order);  // Joins the current transaction
+    paymentService.processPayment(order);     // Joins the current transaction
+    invoiceService.createInvoice(order);      // Joins the current transaction
+    logService.recordAuditLog(order);         // Runs in a new, independent transaction
+}
+
+@Transactional(propagation = Propagation.REQUIRES_NEW)
+public void recordAuditLog(Order order) {
+    auditLogRepository.save(new AuditLog(order));
+}
+
+```
+
+If processOrder() fails, the main transaction will roll back, but the audit log will still be saved because it runs in a new independent transaction (REQUIRES_NEW).
+
+
+# SUPPORTS
+Behavior:
+
+- If a transaction exists, it will join it.
+- If no transaction exists, it will execute non-transactionally.
+
+**Use case**
+- Optional operations: You have an operation that can run inside or outside of a transaction. It's typically used for read-only operations or actions that don't depend on the outcome of a transaction.
+
+```java
+@Transactional(propagation = Propagation.SUPPORTS)
+public User getUserDetails(Long userId) {
+    return userRepository.findById(userId);  // Can run with or without a transaction
+}
+
+```
+
+If the getUserDetails method is called inside a transaction, it will join that transaction. However, if it's called outside a transaction, it will not require one and will simply execute normally.
+
+
+# NOT_SUPPORTED
+Behavior:
+- Suspend the current transaction (if one exists) and execute non-transactionally.
+**Use Case:**
+Operations that shouldn't run inside a transaction: Use this for tasks that don't need to be wrapped in a transaction (e.g., external system calls, reporting, or calculations).
+
+```java
+@Transactional(propagation = Propagation.NOT_SUPPORTED)
+public String fetchExternalData() {
+    return externalService.fetchData();  // Executes non-transactionally
+}
+
+```
+If fetchExternalData() is called inside a transaction, the transaction will be suspended and this method will execute outside any transaction.
+
+
+# MANDATORY
+Behavior:
+- The method must run inside an existing transaction. If no transaction exists, it throws an exception.  
+**Use Case:**
+- Enforcing a transactional context: You need the method to be part of an ongoing transaction, and if no transaction is present, it should fail to ensure consistency.
+
+```java
+@Transactional(propagation = Propagation.MANDATORY)
+public void updateInventory(Order order) {
+    inventoryService.updateStock(order);  // Must be executed within an existing transaction
+}
+
+```
+
+The updateInventory method must always be called within an ongoing transaction. If called outside of a transaction, it will throw an exception, enforcing that the method must be part of a larger transactional context.
+
+# NEVER
+Behavior:
+- The method must not run inside a transaction. If a transaction exists, an exception is thrown.
+**Use Case:**
+- Operations that must be completely outside a transaction: This is used in rare cases, typically for tasks that must not be affected by a transaction, such as batch processes or certain external system calls.
+
+```java
+@Transactional(propagation = Propagation.NEVER)
+public void runBatchJob() {
+    batchJobService.run();  // Must not run within a transaction
+}
+
+```
+
+If runBatchJob() is called inside a transaction, it will throw an exception because it must not run within a transaction.
+
+
+# NESTED
+Behavior:
+- Execute within a nested transaction if the current transaction exists. If no transaction exists, it behaves like REQUIRED and creates a new one.
+**Use Case:**
+- Partial Rollbacks: You need to execute part of the logic in a nested transaction. If the nested transaction fails, it can be rolled back independently without affecting the outer transaction.
+
+```java
+@Transactional
+public void processOrder(Order order) {
+    inventoryService.updateInventory(order);  // Joins the main transaction
+    paymentService.processPayment(order);     // Joins the main transaction
+    invoiceService.createInvoice(order);      // Joins the main transaction
+    try {
+        logService.logTransactionDetails(order);  // Runs in a nested transaction
+    } catch (Exception e) {
+        // If this fails, it only rolls back the logging operation, not the entire order process
+    }
+}
+
+@Transactional(propagation = Propagation.NESTED)
+public void logTransactionDetails(Order order) {
+    logRepository.save(new TransactionLog(order));  // Runs in a nested transaction
+}
+
+```
+
+The logTransactionDetails() method runs in a nested transaction. If it fails, only the logging operation is rolled back, and the rest of the processOrder() logic (inventory update, payment processing, etc.) will still commit.
+
+# Key Differences Between Class-Level and Method-Level `@Transactional`
+
+| **Aspect**             | **Class-Level `@Transactional`**                              | **Method-Level `@Transactional`**                             |
+|------------------------|---------------------------------------------------------------|--------------------------------------------------------------|
+| **Scope**              | Applies to all methods in the class (unless overridden at the method level). | Applies to specific method(s) annotated with `@Transactional`. |
+| **Granularity**        | Less granular; the transaction settings apply to all methods in the class. | Fine-grained; you can customize transaction settings for each method. |
+| **Override Behavior**  | Default behavior for all methods; must override at method level for exceptions. | Can specify transaction settings at the method level, overriding class-level settings. |
+| **Flexibility**        | Less flexible for methods needing different behavior.        | More flexible for fine-tuning individual method transactions. |
+| **Common Use Case**    | When all methods in the class should have the same transaction behavior. | When you need specific methods to have different transactional behavior. |
