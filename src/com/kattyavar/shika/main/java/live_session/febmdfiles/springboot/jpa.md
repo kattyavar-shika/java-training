@@ -1318,3 +1318,50 @@ order.setCustomer(customer);
 customer.getOrders().add(order);
 
 ```
+
+
+# Case to consider 
+
+You have a Customer with many Orders and want to save them in the database.
+
+
+## Question: Should you save via CustomerRepository or OrderRepository?
+
+### Common Issues 
+
+- Saving only the parent (Customer) without setting the owning side (Order.customer) → orders not saved or foreign key missing.
+- Saving only the child (Order) without linking it to a customer → foreign key null, broken relationship.
+- Confusion about which repository to call save() on.
+
+
+# Best Practice:
+
+## 1. Use CustomerRepository.save(customer) with cascading
+
+```java
+// Setup relationship correctly
+order.setCustomer(customer);        // owning side updated
+customer.getOrders().add(order);    // inverse side updated
+
+// Save customer, orders are saved automatically
+customerRepository.save(customer);
+
+```
+
+- Add cascade = CascadeType.ALL on Customer.orders.
+- Saves customer + all orders at once.
+- Cleaner, consistent, easier to maintain.
+
+## 2. If NOT using cascade, save the owning side explicitly
+
+```java
+order.setCustomer(customer);  // must set owning side
+orderRepository.save(order);  // save order separately
+
+```
+
+- Use when you want to save or update orders independently.
+- You must manage saving parent and child separately.
+
+
+
