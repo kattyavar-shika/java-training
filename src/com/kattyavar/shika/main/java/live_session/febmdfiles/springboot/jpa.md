@@ -1380,16 +1380,14 @@ orderRepository.save(order);  // save order separately
 
 When a method annotated with @Transactional calls another method that is also transactional, Spring needs to decide how to handle the transactions — whether to use the existing one or create a new one. This behavior is called transaction propagation.
 
-
 # Common Propagation Types
 
-| **Propagation Type**   | **Description**                                                          |
-|-----------------------|--------------------------------------------------------------------------|
-| REQUIRED (default)     | Join the existing transaction if one exists; else create a new one.     |
-| REQUIRES_NEW           | Suspend the current transaction and create a new one.                   |
-| SUPPORTS               | Join the existing transaction if one exists; else execute non-transactionally. |
-| NOT_SUPPORTED          | Execute non-transactionally, suspending any existing transaction.       |
-| MANDATORY              | Must run within an existing transaction; throws exception if none exists. |
-| NEVER                  | Must run outside of a transaction; throws exception if a transaction exists. |
-| NESTED                 | Execute within a nested transaction if a current transaction exists.    |
-
+| **Propagation Type**   | **Description**                                                          | **Use Case**                                                         |
+|-----------------------|--------------------------------------------------------------------------|----------------------------------------------------------------------|
+| REQUIRED (default)     | Join the existing transaction if one exists; else create a new one.     | Most common; general purpose transactions involving multiple DB ops. |
+| REQUIRES_NEW           | Suspend the current transaction and create a new one.                   | Independent tasks like audit logging that must commit regardless.    |
+| SUPPORTS               | Join the existing transaction if one exists; else execute non-transactionally. | Optional transactions; methods that can run with or without a transaction. |
+| NOT_SUPPORTED          | Execute non-transactionally, suspending any existing transaction.       | Read-only operations or tasks that shouldn’t run inside a transaction. |
+| MANDATORY              | Must run within an existing transaction; throws exception if none exists. | Enforce transaction presence; e.g., methods that require transactional context. |
+| NEVER                  | Must run outside of a transaction; throws exception if a transaction exists. | Operations that must not run within transactions (rare cases).       |
+| NESTED                 | Execute within a nested transaction if a current transaction exists.    | Partial rollback scenarios; nested operations inside larger transactions. |
