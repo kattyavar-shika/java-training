@@ -88,6 +88,23 @@ public class ResourceController {
 | Inclusion of @ResponseBody  | Needs to be explicitly added             | Implicitly includes `@ResponseBody`     |
 
 
+## Exception Handling Summary for `@RestControllerAdvice` in Spring Boot
+
+This table outlines which types of exceptions can be handled by `@RestControllerAdvice` and what alternatives are available for those that cannot.
+
+| **Exception Type**                          | **Handled by `@RestControllerAdvice`** | **Alternative**                                |
+|---------------------------------------------|----------------------------------------|------------------------------------------------|
+| `RuntimeException`, custom exceptions       | ✅                                      | N/A                                            |
+| Filter/Servlet init exceptions              | ❌                                      | `Filter`, `ErrorController`                    |
+| `@Async` method exceptions                  | ❌                                      | `AsyncUncaughtExceptionHandler`               |
+| Spring Security exceptions                  | ❌                                      | `AuthenticationEntryPoint`, `AccessDeniedHandler` |
+| JVM errors (`OutOfMemoryError`, etc.)       | ❌                                      | Monitoring/logging                             |
+| Response-writing errors                     | ❌                                      | Lower-level logging                            |
+
+> **Note:** Exceptions thrown before the request reaches the controller or after the response starts being written cannot be intercepted by `@RestControllerAdvice`.
+
+
+
 
 # how to apply validation 
 
